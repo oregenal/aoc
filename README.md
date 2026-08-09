@@ -1,3 +1,3 @@
-# Advent of Code 2022
+# Advent of Code
 
-[Source](https://adventofcode.com/2022)
+[Source](https://adventofcode.com/)
