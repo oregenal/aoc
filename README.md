@@ -1,3 +1,4 @@
 # Advent of Code
-
-[Source](https://adventofcode.com/)
+[Advent of Code](https://adventofcode.com/)  
+## AoC-2022 in prolog
+[SWI-Prolog](https://www.swi-prolog.org/) version 10.0.2
