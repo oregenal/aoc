@@ -47,11 +47,8 @@ get_result(Fname) :-
 main :-
 	on_signal(int, _, default),
 	current_prolog_flag(argv, Argv),
-	(Argv = [Sample|_],
-		get_result(Sample);
-		write("Provide input file\n")),
-	(Argv = [_|[Input|_]],
-		get_result(Input);
-		write("Provide input file\n")).
+	Argv \= [], 
+	maplist(get_result, Argv);
+	write("Provide input file\n").
 
 % vim: set filetype=prolog:
