@@ -1,5 +1,3 @@
-#!/usr/bin/env swipl
-
 :- initialization(main, main).
 
 :- use_module('../plib/lib').

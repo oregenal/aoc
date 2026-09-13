@@ -1,5 +1,7 @@
 INPUT=sample.txt input.txt
+PROLOG=swipl
+SRC=main.pl
 
 .PHONY: run
-run:main.pl
-	./main.pl $(INPUT)
+run:$(SRC)
+	$(PROLOG) $< $(INPUT)
