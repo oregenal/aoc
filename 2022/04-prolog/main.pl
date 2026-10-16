@@ -21,29 +21,27 @@ get_ages(Segment, Edges) :-
 	split_string(Segment, "-", "", StrEdges),
 	maplist(number_string, Edges, StrEdges).
 
-% One segment fully contain the second
-% if start of the fist >= start of the second
-% and end of the first =< end of the second
-% Or vice versa
+% One segment fully contain the other if
+% start of the fist >= start of the second
+% and the end of the first =< end of the second
+% or vice versa
 fully_contain(Edges, Score) :-
-	Edges = [[S1|[E1|_]],[S2|[E2|_]]], S1 >= S2, E1 =< E2, Score is 1, !;
-	Edges = [[S1|[E1|_]],[S2|[E2|_]]], S1 =< S2, E1 >= E2, Score is 1, !;
+	Edges = [[S1|[E1|_]],[S2|[E2|_]]], S1 >= S2, E1 =< E2, Score is 1;
+	Edges = [[S1|[E1|_]],[S2|[E2|_]]], S2 >= S1, E2 =< E1, Score is 1;
 	Score is 0.
 
-% Segments overlapping the other if 
-% start of the first is >= start of the second and
-% start of the first is =< end of the second, etc.
-% or if start of the firs is =< end of the second
-% end end of the first >= start of the second
+% One segment overlap the other if
+% start of the first >= start of the second and =< end of the second
+% or vice versa
 overlap_at_all(Edges, Score) :-
-	Edges = [[S1|_],[S2|[E2|_]]], S1 >= S2, S1 =< E2, Score is 1, !;
-	Edges = [[S1|[E1|_]],[S2|_]], S1 =< S2, E1 >= S2, Score is 1, !;
+	Edges = [[S1|_],[S2|[E2|_]]], S1 >= S2, S1 =< E2, Score is 1;
+	Edges = [[S1|[E1|_]],[S2|_]], S2 >= S1, S2 =< E1, Score is 1;
 	Score is 0.
 
 main :-
 	on_signal(int, _, default),
 	current_prolog_flag(argv, Argv),
-	Argv \= [], 
+	Argv \= [],
 	maplist(get_result, Argv);
 	write("Provide input file\n").
 
